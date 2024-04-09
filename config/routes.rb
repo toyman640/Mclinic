@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'patients/index'
+  get 'patients/new'
+  get 'patients/create'
   # get 'staff_session/new'
   # get 'staff_session/create'
   # get 'staff/index'
@@ -10,4 +13,5 @@ Rails.application.routes.draw do
   root "staff_sessions#new"
   resources :staffs, only: [:index, :new, :create]
   resources :staff_sessions, only: [:new, :create]
+  resources :patients, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 end

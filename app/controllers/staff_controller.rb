@@ -9,15 +9,14 @@ class StaffController < ApplicationController
 
   def create
     @staff = Staff.new(staff_params)
-    
+
     if @staff.save
-      flash[:notice] = "Staff created successfully"
+      flash[:notice] = 'Staff created successfully'
       redirect_to users_path
     else
-      flash[:alert] = "Staff not created"
+      flash[:alert] = 'Staff not created'
       render :new, status: :unprocessable_entity
     end
-     
   end
 
   def staff_params

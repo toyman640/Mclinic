@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "staff_session#new"
+  root "staff_sessions#new"
   resources :staffs, only: [:index, :new, :create]
   resources :staff_sessions, only: [:new, :create]
 end

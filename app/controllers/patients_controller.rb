@@ -10,8 +10,9 @@ class PatientsController < ApplicationController
 
   def create
     @patient = Patient.new(patient_params)
+    puts @patient.attributes.inspect
     if @patient.save
-      redirect_to @patient, notice: 'Patient was successfully created.'
+      redirect_to patients_path, notice: 'Patient was successfully created.'
     else
       render :new
     end
@@ -21,7 +22,28 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
   end
 
+  def edit
+    @patient = Patient.find(params[:id])
+  end
+
+  def update
+    @patient = Patient.find(params[:id])
+    if @patient.update(patient_params)
+      redirect_to patients_path, notice: 'Patient was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @patient = Patient.find(params[:id])
+    @patient.destroy
+    redirect_to patients_path, notice: 'Patient was successfully deleted.'
+  end
+
+  private
+
   def patient_params
-    params.require(:patient).permit(:name, :age)
+    params.require(:patient).permit(:fullname, :age)
   end
 end

@@ -1,10 +1,9 @@
 class PatientsController < ApplicationController
   before_action :require_login
   before_action :require_login
-  
+
   def index
     @patients = Patient.all
-
   end
 
   def new
@@ -55,10 +54,9 @@ class PatientsController < ApplicationController
   end
 
   def require_login
-    unless current_user
-      flash[:alert] = 'You must be logged in to access this page.'
-      redirect_to login_path
-    end
+    return if current_user
+
+    flash[:alert] = 'You must be logged in to access this page.'
+    redirect_to login_path
   end
-  
 end

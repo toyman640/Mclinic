@@ -5,7 +5,7 @@
       <li>
         <%= patient.fullname %> - <%= patient.age %>
         <%= link_to "Edit", edit_patient_path(patient) %>
-        <%= link_to "Delete", patient_path(patient), method: :delete, data: { confirm: "Are you sure?" } %>
+        <%= button_to "Delete", delete_patient_path(patient), method: :delete, data: { confirm: "Are you sure?" } %>
         
       </li>
     <% end %>
@@ -15,5 +15,6 @@
   </ul>
 <% else %>
   <h1>Welcome, Dr. <%= current_user.username %></h1>
+  <%= line_chart Patient.group_by_day(:created_at, last: 7).count %>
   <%= link_to "Logout", logout_path, class: "button", data: { "turbo-method": :delete } %>
 <% end %>

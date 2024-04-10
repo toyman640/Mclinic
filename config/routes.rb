@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   root "staff_sessions#new"
   resources :staffs, only: [:index, :new, :create]
   resources :staff_sessions, only: [:new, :create]
-  resources :patients, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :patients
+  delete '/patients/:id', to: 'patients#destroy', as: 'delete_patient'
   delete '/logout', to: 'staff_sessions#destroy'
   get 'login', to: 'staff_sessions#new'
 end

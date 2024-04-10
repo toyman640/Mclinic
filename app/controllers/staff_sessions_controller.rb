@@ -10,7 +10,7 @@ class StaffSessionsController < ApplicationController
     if @staff&.authenticate(params[:staff][:password])
       session[:staff_id] = @staff.id
       if @staff.role == 'doctor'
-        redirect_to doctor_dashboard_path
+        redirect_to patients_path
         puts 'Login successful: Good'
       elsif @staff.role == 'receptionist'
         redirect_to patients_path

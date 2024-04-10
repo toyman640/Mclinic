@@ -1,4 +1,7 @@
 class PatientsController < ApplicationController
+  before_action :require_login
+  before_action :require_login
+  
   def index
     @patients = Patient.all
 
@@ -46,4 +49,16 @@ class PatientsController < ApplicationController
   def patient_params
     params.require(:patient).permit(:fullname, :age)
   end
+
+  def set_patient
+    @patient = Patient.find(params[:id])
+  end
+
+  def require_login
+    unless current_user
+      flash[:alert] = 'You must be logged in to access this page.'
+      redirect_to login_path
+    end
+  end
+  
 end
